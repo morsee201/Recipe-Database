@@ -1,0 +1,24 @@
+{% extends "gradebook/base.html" %}
+{% load Groups %}
+
+
+{% block content %}
+
+	{% if request.user|has_group:"Instructor" %}
+	
+		<h1> List of active Assignments.</h1>
+		{% if assignment_list %}
+		<ul>
+			{% for assignment in assignment_list %}
+				<li>
+					<a href="{{assignment.get_absolute_url}}"> {{assignment.name}}</a> 
+				</li>
+            {% endfor %}
+		</ul>
+		{% else %}
+		<p> No assignments have been created.</p>
+		{% endif %}
+		<a href="{% url 'newAssignment'%}" class="button">Add New Assignment</a>
+	{% endif %}
+
+{% endblock %}

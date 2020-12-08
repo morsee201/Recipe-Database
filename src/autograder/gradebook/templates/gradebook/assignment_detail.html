@@ -1,0 +1,43 @@
+{% extends "gradebook/base.html" %}
+{% load Groups %}
+
+
+{% block content %}
+
+	<h2>Assignment Details</h2>
+	<p>Name: {{assignment.name}}</p>
+	<p>Description: {{assignment.description}}</p>
+	<p>Due: {{assignment.due_date}}</p>
+	
+	{% if assignment.extra_file %}
+		<p>Files: {{assignment.extra_file}}</p>
+	{% else %}
+		<p>No source files were given by the instructor.</p>
+	{% endif %}
+	
+	<h3>Viewable Tests: </h3>
+	{% for test in assignment.test_set.all%}
+	
+		{% if request.user|has_group:"Student" %}
+			{% if test.view == 'Viewable to all' %}
+				<ul>
+					<li>
+						<a href="{{test.get_absolute_url}}"> {{test.name}}</a>
+					</li>
+				</ul>
+			{% endif %}
+		{% endif %}
+		
+		{% if request.user|has_group:"Instructor" %}
+			<ul>
+				<li>
+					<a href="{{test.get_absolute_url}}"> {{test.name}}</a>
+				</li>
+			</ul>
+		{% endif %}
+		
+	{% endfor %}
+	
+	
+
+{% endblock %}

@@ -1,0 +1,5 @@
+__pycache__
+*.pyc
+data
+src/autograder/gradebook/__pycache__
+src/autograder/Files

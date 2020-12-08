@@ -1,0 +1,12 @@
+{% extends "gradebook/base.html" %}
+{% load Groups %}
+
+{% block content %}
+
+	<p>Test Name: {{test.name}}</p>
+	<p>Description: {{test.description}}</p>
+	<p>Assignment: {{test.attached_assignment}}</p>
+	<p>Test Files: {{test.test_file}}</p>
+	
+
+{% endblock %}
